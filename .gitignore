@@ -1,6 +1,9 @@
 
 .build
 
+example/first.exe
+example/first.pdb
+
 *.sublime-workspace
 
 .*.swp
