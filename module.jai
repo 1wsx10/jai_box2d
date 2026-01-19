@@ -8,3 +8,5 @@
 } else #if OS == .MACOS {
 	#load "generated/macos.jai";
 }
+
+util :: #import,file "util.jai";
