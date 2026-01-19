@@ -1,4 +1,6 @@
 
+.build
+
 *.sublime-workspace
 
 .*.swp
