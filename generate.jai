@@ -7,13 +7,18 @@ build :: ()
 
     compile_args : [..] string;
     if OS == .WINDOWS
+    {
         array_add(*compile_args, "/I", "box2d/include", "/std:c17");
+    }
     else if OS == .LINUX
+    {
         array_add(*compile_args, "-I", "box2d/include", "-std=c17");
+        array_add(*compile_args, "-D", "_POSIX_C_SOURCE=199309L");
+    }
 
     sources : [..] string;
     array_add(*sources, ..enum_cpp_files("box2d/src"));
-    
+
     array_add(*sources, "inlines.c");
     if !build_cpp("inlines", "inlines.c", type = .OBJ_FILE, extra = compile_args, debug=true)
         return;
