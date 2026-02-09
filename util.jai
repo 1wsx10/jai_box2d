@@ -1,8 +1,8 @@
 
-view :: (e : b2.SensorEvents) -> (beginEvents: [] b2.SensorBeginTouchEvent, endEvents: [] b2.SensorEndTouchEvent)
+view :: (e : SensorEvents) -> (beginEvents: [] SensorBeginTouchEvent, endEvents: [] SensorEndTouchEvent)
 {
-	beginEvents: [] b2.SensorBeginTouchEvent;
-	endEvents: [] b2.SensorEndTouchEvent;
+	beginEvents: [] SensorBeginTouchEvent;
+	endEvents: [] SensorEndTouchEvent;
 
 	beginEvents.data = e.beginEvents;
 	beginEvents.count = e.beginCount;
@@ -13,11 +13,11 @@ view :: (e : b2.SensorEvents) -> (beginEvents: [] b2.SensorBeginTouchEvent, endE
 	return beginEvents, endEvents;
 }
 
-view :: (e : b2.ContactEvents) -> (beginEvents: [] b2.ContactBeginTouchEvent, endEvents: [] b2.ContactEndTouchEvent, hitEvents: [] b2.ContactHitEvent)
+view :: (e : ContactEvents) -> (beginEvents: [] ContactBeginTouchEvent, endEvents: [] ContactEndTouchEvent, hitEvents: [] ContactHitEvent)
 {
-	beginEvents: [] b2.ContactBeginTouchEvent;
-	endEvents: [] b2.ContactEndTouchEvent;
-	hitEvents: [] b2.ContactHitEvent;
+	beginEvents: [] ContactBeginTouchEvent;
+	endEvents: [] ContactEndTouchEvent;
+	hitEvents: [] ContactHitEvent;
 
 	beginEvents.data = e.beginEvents;
 	beginEvents.count = e.beginCount;
@@ -31,14 +31,11 @@ view :: (e : b2.ContactEvents) -> (beginEvents: [] b2.ContactBeginTouchEvent, en
 	return beginEvents, endEvents, hitEvents;
 }
 
-view :: (e : b2.BodyEvents) -> [] b2.BodyMoveEvent
+view :: (e : BodyEvents) -> [] BodyMoveEvent
 {
-	ret : [] b2.BodyMoveEvent;
+	ret : [] BodyMoveEvent;
 	ret.data = e.moveEvents;
 	ret.count = e.moveCount;
 	return ret;
 }
 
-#scope_file
-
-b2 :: #import,file "module.jai";

@@ -21,4 +21,18 @@
 	#load "generated/macos.jai";
 }
 
-util :: #import,file "util.jai";
+util :: struct {
+	// workaround because #load doesn't work within a struct scope.
+	#insert #run read_file("util.jai");
+}
+
+#scope_file
+
+read_file :: (filename: string, loc := #caller_location) -> string
+{
+	#import "File";
+	#import "File_Utilities";
+	path := parse_path(loc.fully_pathed_filename);
+	path.words[path.words.count-1] = filename;
+	return read_entire_file(path_to_string(path));
+}
