@@ -91,4 +91,14 @@ view :: (e : BodyEvents) -> [] BodyMoveEvent
 	return ret;
 }
 
+operator == :: (a: WorldId, b: WorldId) -> bool
+{
+	return memcmp(*a, *b, size_of(WorldId)) == 0;
+}
+
+operator == :: (a: $T/interface BodyId, b: T) -> bool
+{
+	return memcmp(*a, *b, size_of(T)) == 0;
+}
+
 #import "Math";
