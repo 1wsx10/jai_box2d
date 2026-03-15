@@ -1,3 +1,4 @@
+// vim: et
 LIBRARY_TYPE :: Build_Type.STATIC_LIBRARY;
 
 #run build();
@@ -12,16 +13,15 @@ build :: ()
     }
     else if OS == .LINUX
     {
-        array_add(*compile_args, "-I", "box2d/include", "-std=c17");
+        array_add(*compile_args, "-I", "box2d/include");
+        array_add(*compile_args, "-std=c17");
+        array_add(*compile_args, "-fvisibility=hidden", "-D", "box2d_EXPORTS");
         array_add(*compile_args, "-D", "_POSIX_C_SOURCE=199309L");
     }
 
     sources : [..] string;
     array_add(*sources, ..enum_cpp_files("box2d/src"));
-
     array_add(*sources, "inlines.c");
-    if !build_cpp("inlines", "inlines.c", type = .OBJ_FILE, extra = compile_args, debug=true)
-        return;
 
     if !build_cpp("box2d", ..sources, type = LIBRARY_TYPE, extra = compile_args, debug=true)
         return;
